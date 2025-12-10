@@ -10,40 +10,42 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* Tema Variabel */
+    /* Tema Variabel - Oranye Dominan */
     :root {
-      /* Light Theme */
-      --primary-light: #2563eb;
-      --primary-dark-light: #1d4ed8;
-      --secondary-light: #7c3aed;
-      --secondary-dark-light: #6d28d9;
-      --accent-light: #ef4444;
-      --dark-light: #f8fafc;
-      --dark-light-light: #ffffff;
-      --light-light: #0f172a;
-      --gray-light: #64748b;
+      /* Light Theme - Oranye (FULL TERANG) */
+      --primary-light: #f97316;
+      --primary-dark-light: #ea580c;
+      --secondary-light: #f59e0b;
+      --secondary-dark-light: #d97706;
+      --accent-light: #dc2626;
+      --dark-light: #ffffff; /* Warna putih murni */
+      --dark-light-light: #f8fafc; /* Sedikit abu untuk kontras */
+      --light-light: #0f172a; /* Teks gelap untuk kontras */
+      --gray-light: #475569; /* Abu yang lebih gelap untuk kontras */
       --success-light: #10b981;
-      --border-light: #e2e8f0;
-      --card-bg-light: #ffffff;
-      --shadow-light: 0 10px 25px rgba(0, 0, 0, 0.08);
+      --border-light: #fed7aa;
+      --card-bg-light: #ffffff; /* Putih murni */
+      --shadow-light: 0 10px 25px rgba(0, 0, 0, 0.08); /* Shadow yang lebih netral */
       --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --glow-light: 0 0 20px rgba(249, 115, 22, 0.1); /* Efek glow yang lebih halus */
     }
 
-    /* Dark Theme Default */
+    /* Dark Theme Default - Oranye (DISEMPURNAKAN) */
     :root {
-      --primary: #3b82f6;
-      --primary-dark: #2563eb;
-      --secondary: #8b5cf6;
-      --secondary-dark: #7c3aed;
+      --primary: #f97316;
+      --primary-dark: #ea580c;
+      --secondary: #f59e0b;
+      --secondary-dark: #d97706;
       --accent: #ef4444;
-      --dark: #0f172a;
-      --dark-light: #1e293b;
+      --dark: #0c1321; /* Warna yang lebih hangat */
+      --dark-light: #1a2233; /* Warna yang lebih hangat */
       --light: #f8fafc;
       --gray: #94a3b8;
       --success: #10b981;
-      --border: #334155;
-      --card-bg: #1e293b;
-      --shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      --border: #ea580c; /* Konsisten dengan primary-dark */
+      --card-bg: #1a2233; /* Disinkronkan dengan dark-light */
+      --shadow: 0 10px 25px rgba(249, 115, 22, 0.25); /* Shadow yang lebih kuat */
+      --glow: 0 0 20px rgba(249, 115, 22, 0.15); /* Efek glow baru */
     }
 
     [data-theme="light"] {
@@ -52,14 +54,15 @@
       --secondary: var(--secondary-light);
       --secondary-dark: var(--secondary-dark-light);
       --accent: var(--accent-light);
-      --dark: var(--dark-light);
-      --dark-light: var(--dark-light-light);
-      --light: var(--light-light);
+      --dark: var(--dark-light); /* WHITE */
+      --dark-light: var(--dark-light-light); /* Light gray */
+      --light: var(--light-light); /* Dark text */
       --gray: var(--gray-light);
       --success: var(--success-light);
       --border: var(--border-light);
-      --card-bg: var(--card-bg-light);
+      --card-bg: var(--card-bg-light); /* WHITE */
       --shadow: var(--shadow-light);
+      --glow: var(--glow-light);
     }
 
     * {
@@ -70,14 +73,14 @@
     }
 
     body {
-      background-color: var(--dark);
-      color: var(--light);
+      background-color: var(--dark); /* WHITE in light mode */
+      color: var(--light); /* Dark text in light mode */
       line-height: 1.6;
       overflow-x: hidden;
       transition: var(--transition);
     }
 
-    /* Animated Background */
+    /* Animated Background - DISEMPURNAKAN */
     .bg-animation {
       position: fixed;
       top: 0;
@@ -88,11 +91,18 @@
       overflow: hidden;
     }
 
+    [data-theme="dark"] .gradient-circle {
+      opacity: 0.15; /* Ditingkatkan untuk visibilitas yang lebih baik */
+    }
+
+    [data-theme="light"] .gradient-circle {
+      opacity: 0.05; /* Sangat redup untuk tema terang */
+    }
+
     .gradient-circle {
       position: absolute;
       border-radius: 50%;
       filter: blur(60px);
-      opacity: 0.1;
       animation: float 20s infinite ease-in-out;
     }
 
@@ -123,7 +133,7 @@
       }
     }
 
-    /* Header */
+    /* Header - DISEMPURNAKAN */
     .header {
       position: fixed;
       top: 0;
@@ -131,15 +141,25 @@
       width: 100%;
       z-index: 1000;
       padding: 1.25rem 0;
-      background-color: var(--dark-light);
+      background-color: rgba(255, 255, 255, 0.97); /* Putih dengan transparansi */
       backdrop-filter: blur(15px);
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid rgba(249, 115, 22, 0.2);
       transition: var(--transition);
       box-shadow: var(--shadow);
     }
 
+    [data-theme="dark"] .header {
+      background-color: rgba(26, 34, 51, 0.97); /* Dark-light dengan transparansi */
+      border-bottom: 1px solid rgba(234, 88, 12, 0.3);
+    }
+
     .header.scrolled {
       padding: 1rem 0;
+      background-color: var(--dark-light); /* Light gray in light mode */
+    }
+
+    [data-theme="dark"] .header.scrolled {
+      background-color: var(--dark-light);
     }
 
     .header-container {
@@ -159,7 +179,7 @@
       font-family: 'Space Grotesk', sans-serif;
       font-weight: 700;
       font-size: 1.5rem;
-      color: var(--light);
+      color: var(--light); /* Dark text in light mode */
     }
 
     .logo-icon {
@@ -168,9 +188,19 @@
       animation: pulse 3s infinite;
     }
 
+    [data-theme="dark"] .logo-icon {
+      text-shadow: 0 0 10px rgba(249, 115, 22, 0.5);
+    }
+
     @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.7; }
+      0%, 100% { 
+        opacity: 1; 
+        transform: scale(1);
+      }
+      50% { 
+        opacity: 0.8; 
+        transform: scale(1.05);
+      }
     }
 
     /* Desktop Navigation */
@@ -187,7 +217,7 @@
     }
 
     .nav-link {
-      color: var(--light);
+      color: var(--light); /* Dark text in light mode */
       text-decoration: none;
       font-weight: 500;
       font-size: 0.95rem;
@@ -251,6 +281,11 @@
 
     [data-theme="dark"] .theme-toggle::before {
       transform: translateX(24px);
+      box-shadow: 0 0 5px rgba(249, 115, 22, 0.5);
+    }
+
+    [data-theme="light"] .theme-toggle::before {
+      box-shadow: 0 0 3px rgba(249, 115, 22, 0.3);
     }
 
     .theme-toggle i {
@@ -267,6 +302,10 @@
 
     .theme-toggle .fa-moon {
       right: 6px;
+      color: #64748b;
+    }
+
+    [data-theme="light"] .theme-toggle .fa-moon {
       color: #94a3b8;
     }
 
@@ -285,11 +324,13 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
     }
 
     .login-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+      box-shadow: 0 8px 20px rgba(249, 115, 22, 0.4);
+      background: linear-gradient(135deg, var(--primary-dark), #c2410c);
     }
 
     /* Mobile Toggle */
@@ -297,7 +338,7 @@
       display: none;
       background: none;
       border: none;
-      color: var(--light);
+      color: var(--light); /* Dark text in light mode */
       font-size: 1.25rem;
       cursor: pointer;
     }
@@ -309,7 +350,7 @@
       right: -100%;
       width: 280px;
       height: 100vh;
-      background-color: var(--dark-light);
+      background-color: var(--dark-light); /* Light gray in light mode */
       z-index: 2000;
       padding: 2rem;
       transition: var(--transition);
@@ -317,6 +358,11 @@
       border-left: 1px solid var(--border);
       display: flex;
       flex-direction: column;
+    }
+
+    [data-theme="dark"] .nav-mobile {
+      box-shadow: -5px 0 25px rgba(0, 0, 0, 0.2);
+      border-left: 1px solid rgba(234, 88, 12, 0.3);
     }
 
     .nav-mobile.active {
@@ -335,7 +381,7 @@
     .mobile-close {
       background: none;
       border: none;
-      color: var(--light);
+      color: var(--light); /* Dark text in light mode */
       font-size: 1.25rem;
       cursor: pointer;
     }
@@ -350,7 +396,7 @@
       align-items: center;
       gap: 1rem;
       padding: 0.875rem;
-      color: var(--light);
+      color: var(--light); /* Dark text in light mode */
       text-decoration: none;
       border-radius: 8px;
       margin-bottom: 0.5rem;
@@ -358,7 +404,7 @@
     }
 
     .mobile-nav-link:hover {
-      background-color: rgba(59, 130, 246, 0.1);
+      background-color: rgba(249, 115, 22, 0.1);
       color: var(--primary);
     }
 
@@ -374,7 +420,7 @@
       display: flex;
       align-items: center;
       gap: 0.75rem;
-      color: var(--light);
+      color: var(--light); /* Dark text in light mode */
       font-weight: 500;
     }
 
@@ -407,6 +453,10 @@
       opacity: 0;
       transform: translateY(30px);
       animation: fadeUp 0.8s ease forwards;
+    }
+
+    [data-theme="dark"] .hero-title {
+      text-shadow: 0 0 20px rgba(249, 115, 22, 0.2);
     }
 
     @keyframes fadeUp {
@@ -454,6 +504,10 @@
       margin-bottom: 0.25rem;
     }
 
+    [data-theme="dark"] .stat-number {
+      text-shadow: 0 0 8px rgba(249, 115, 22, 0.3);
+    }
+
     .stat-label {
       font-size: 0.875rem;
       color: var(--gray);
@@ -461,18 +515,24 @@
       letter-spacing: 1px;
     }
 
-    /* Promo Section */
+    /* Promo Section - DISEMPURNAKAN */
     .promo-section {
-      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+      background: linear-gradient(135deg, rgba(249, 115, 22, 0.08), rgba(245, 158, 11, 0.05));
       border-radius: 16px;
       padding: 2.5rem;
       margin: 3rem 0;
-      border: 1px solid rgba(59, 130, 246, 0.2);
+      border: 1px solid rgba(249, 115, 22, 0.15);
       position: relative;
       overflow: hidden;
       opacity: 0;
       transform: translateY(30px);
       animation: fadeUp 0.8s ease 0.3s forwards;
+    }
+
+    [data-theme="dark"] .promo-section {
+      background: linear-gradient(135deg, rgba(249, 115, 22, 0.15), rgba(245, 158, 11, 0.1));
+      border: 1px solid rgba(249, 115, 22, 0.25);
+      box-shadow: var(--glow);
     }
 
     .promo-section::before {
@@ -497,6 +557,10 @@
       animation: spin 20s linear infinite;
     }
 
+    [data-theme="dark"] .promo-icon {
+      text-shadow: 0 0 10px rgba(249, 115, 22, 0.3);
+    }
+
     @keyframes spin {
       0% { transform: rotate(0); }
       100% { transform: rotate(360deg); }
@@ -505,7 +569,7 @@
     .promo-text h3 {
       font-size: 1.5rem;
       margin-bottom: 0.75rem;
-      color: var(--light);
+      color: var(--light); /* Dark text in light mode */
     }
 
     .promo-text p {
@@ -513,13 +577,18 @@
       margin-bottom: 1rem;
     }
 
-    /* About Section */
+    /* About Section - DISEMPURNAKAN */
     .about-section {
       padding: 5rem 0;
-      background: linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.9));
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.95));
       margin: 3rem 0;
       position: relative;
       overflow: hidden;
+    }
+
+    [data-theme="dark"] .about-section {
+      background: linear-gradient(135deg, rgba(12, 19, 33, 0.9), rgba(26, 34, 51, 0.95));
+      box-shadow: var(--glow);
     }
 
     .about-section::before {
@@ -543,7 +612,7 @@
       font-size: 2.5rem;
       font-weight: 700;
       margin-bottom: 1.5rem;
-      color: var(--light);
+      color: var(--light); /* Dark text in light mode */
       position: relative;
       display: inline-block;
     }
@@ -559,12 +628,17 @@
       border-radius: 2px;
     }
 
+    [data-theme="dark"] .about-text h2::after {
+      box-shadow: 0 0 5px rgba(249, 115, 22, 0.5);
+    }
+
     .about-text p {
       color: var(--gray);
       margin-bottom: 1.5rem;
       line-height: 1.8;
     }
 
+    /* Feature Items - DISEMPURNAKAN */
     .about-features {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -577,15 +651,41 @@
       align-items: flex-start;
       gap: 1rem;
       padding: 1.25rem;
-      background-color: rgba(59, 130, 246, 0.1);
+      background-color: rgba(249, 115, 22, 0.05);
       border-radius: 12px;
-      border: 1px solid rgba(59, 130, 246, 0.2);
+      border: 1px solid rgba(249, 115, 22, 0.1);
       transition: var(--transition);
+      position: relative;
+    }
+
+    [data-theme="dark"] .feature-item {
+      background-color: rgba(249, 115, 22, 0.08);
+      border: 1px solid rgba(249, 115, 22, 0.15);
+    }
+
+    .feature-item::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: inherit;
+      box-shadow: inset 0 0 20px rgba(249, 115, 22, 0.03);
+      pointer-events: none;
     }
 
     .feature-item:hover {
       transform: translateY(-5px);
-      background-color: rgba(59, 130, 246, 0.15);
+      background-color: rgba(249, 115, 22, 0.08);
+      border-color: rgba(249, 115, 22, 0.2);
+      box-shadow: 0 10px 20px rgba(249, 115, 22, 0.1);
+    }
+
+    [data-theme="dark"] .feature-item:hover {
+      background-color: rgba(249, 115, 22, 0.12);
+      border-color: rgba(249, 115, 22, 0.25);
+      box-shadow: 0 10px 20px rgba(249, 115, 22, 0.15);
     }
 
     .feature-icon {
@@ -599,12 +699,13 @@
       color: white;
       font-size: 1.25rem;
       flex-shrink: 0;
+      box-shadow: 0 4px 10px rgba(249, 115, 22, 0.2);
     }
 
     .feature-content h4 {
       font-size: 1.1rem;
       margin-bottom: 0.5rem;
-      color: var(--light);
+      color: var(--light); /* Dark text in light mode */
     }
 
     .feature-content p {
@@ -614,17 +715,35 @@
     }
 
     .server-info {
-      background-color: var(--card-bg);
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.9));
       border-radius: 16px;
       padding: 2.5rem;
-      border: 1px solid var(--border);
+      border: 1px solid rgba(249, 115, 22, 0.15);
       box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    [data-theme="dark"] .server-info {
+      background: linear-gradient(145deg, rgba(26, 34, 51, 0.9), rgba(12, 19, 33, 0.9));
+      border: 1px solid rgba(234, 88, 12, 0.3);
+    }
+
+    .server-info::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: inherit;
+      box-shadow: inset 0 0 20px rgba(249, 115, 22, 0.03);
+      pointer-events: none;
     }
 
     .server-info h3 {
       font-size: 1.5rem;
       margin-bottom: 1.5rem;
-      color: var(--light);
+      color: var(--light); /* Dark text in light mode */
       display: flex;
       align-items: center;
       gap: 0.75rem;
@@ -645,7 +764,24 @@
       align-items: flex-start;
       gap: 1rem;
       padding-bottom: 1.5rem;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid rgba(249, 115, 22, 0.1);
+      position: relative;
+    }
+
+    [data-theme="dark"] .info-item {
+      border-bottom: 1px solid rgba(234, 88, 12, 0.2);
+    }
+
+    .info-item::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: inherit;
+      box-shadow: inset 0 0 15px rgba(249, 115, 22, 0.02);
+      pointer-events: none;
     }
 
     .info-item:last-child {
@@ -656,7 +792,7 @@
     .info-icon {
       width: 40px;
       height: 40px;
-      background-color: rgba(59, 130, 246, 0.1);
+      background-color: rgba(249, 115, 22, 0.08);
       border-radius: 10px;
       display: flex;
       align-items: center;
@@ -664,12 +800,18 @@
       color: var(--primary);
       font-size: 1rem;
       flex-shrink: 0;
+      box-shadow: 0 2px 5px rgba(249, 115, 22, 0.1);
+    }
+
+    [data-theme="dark"] .info-icon {
+      background-color: rgba(249, 115, 22, 0.12);
+      box-shadow: 0 2px 5px rgba(249, 115, 22, 0.2);
     }
 
     .info-content h4 {
       font-size: 1rem;
       margin-bottom: 0.25rem;
-      color: var(--light);
+      color: var(--light); /* Dark text in light mode */
     }
 
     .info-content p {
@@ -690,7 +832,7 @@
     .section-title {
       font-size: 2rem;
       font-weight: 700;
-      color: var(--light);
+      color: var(--light); /* Dark text in light mode */
       margin-bottom: 0.75rem;
       opacity: 0;
       transform: translateY(20px);
@@ -727,8 +869,8 @@
 
     .category-tab {
       padding: 0.75rem 1.5rem;
-      border: 1px solid var(--border);
-      background: transparent;
+      border: 1px solid rgba(249, 115, 22, 0.2);
+      background: rgba(255, 255, 255, 0.7);
       color: var(--gray);
       border-radius: 50px;
       cursor: pointer;
@@ -740,12 +882,35 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      position: relative;
+    }
+
+    [data-theme="dark"] .category-tab {
+      border: 1px solid rgba(234, 88, 12, 0.3);
+      background: rgba(12, 19, 33, 0.5);
+    }
+
+    .category-tab::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: inherit;
+      box-shadow: inset 0 0 10px rgba(249, 115, 22, 0.03);
+      pointer-events: none;
     }
 
     .category-tab.active {
       background: linear-gradient(135deg, var(--primary), var(--secondary));
       color: white;
       border-color: transparent;
+      box-shadow: 0 5px 15px rgba(249, 115, 22, 0.2);
+    }
+
+    [data-theme="dark"] .category-tab.active {
+      box-shadow: 0 5px 15px rgba(249, 115, 22, 0.3);
     }
 
     .tab-logo {
@@ -754,7 +919,7 @@
       object-fit: contain;
     }
 
-    /* Product Cards */
+    /* Product Cards - DISEMPURNAKAN */
     .product-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -762,16 +927,33 @@
     }
 
     .product-card {
-      background-color: var(--card-bg);
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.9));
       border-radius: 12px;
       padding: 1.75rem;
-      border: 1px solid var(--border);
+      border: 1px solid rgba(249, 115, 22, 0.15);
       transition: var(--transition);
       opacity: 0;
       transform: translateY(30px);
       animation: fadeUp 0.8s ease forwards;
       position: relative;
       overflow: hidden;
+    }
+
+    [data-theme="dark"] .product-card {
+      background: linear-gradient(145deg, rgba(26, 34, 51, 0.9), rgba(12, 19, 33, 0.9));
+      border: 1px solid rgba(234, 88, 12, 0.3);
+    }
+
+    .product-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: inherit;
+      box-shadow: inset 0 0 20px rgba(249, 115, 22, 0.03);
+      pointer-events: none;
     }
 
     .product-card:nth-child(1) { animation-delay: 0.2s; }
@@ -782,7 +964,13 @@
     .product-card:hover {
       transform: translateY(-8px);
       border-color: var(--primary);
-      box-shadow: var(--shadow);
+      box-shadow: 0 15px 30px rgba(249, 115, 22, 0.15);
+      background: linear-gradient(145deg, rgba(255, 255, 255, 1), rgba(248, 250, 252, 1));
+    }
+
+    [data-theme="dark"] .product-card:hover {
+      box-shadow: 0 15px 30px rgba(249, 115, 22, 0.3);
+      background: linear-gradient(145deg, rgba(26, 34, 51, 1), rgba(12, 19, 33, 1));
     }
 
     .product-card.popular::before {
@@ -796,6 +984,11 @@
       transform: rotate(45deg);
       font-size: 0.8rem;
       font-weight: 600;
+      box-shadow: 0 3px 10px rgba(239, 68, 68, 0.2);
+    }
+
+    [data-theme="dark"] .product-card.popular::before {
+      box-shadow: 0 3px 10px rgba(239, 68, 68, 0.3);
     }
 
     .product-header {
@@ -808,7 +1001,7 @@
     .product-name {
       font-size: 1.25rem;
       font-weight: 600;
-      color: var(--light);
+      color: var(--light); /* Dark text in light mode */
       display: flex;
       align-items: center;
       gap: 8px;
@@ -828,6 +1021,10 @@
       line-height: 1;
     }
 
+    [data-theme="dark"] .product-price {
+      text-shadow: 0 0 5px rgba(249, 115, 22, 0.3);
+    }
+
     .product-period {
       font-size: 0.875rem;
       color: var(--gray);
@@ -843,7 +1040,7 @@
       align-items: center;
       gap: 0.75rem;
       margin-bottom: 0.75rem;
-      color: var(--light);
+      color: var(--light); /* Dark text in light mode */
       font-size: 0.875rem;
     }
 
@@ -869,6 +1066,8 @@
       transition: var(--transition);
       font-size: 0.875rem;
       flex: 1;
+      position: relative;
+      z-index: 1;
     }
 
     .btn-primary {
@@ -876,11 +1075,21 @@
       color: white;
       border: none;
       cursor: pointer;
+      box-shadow: 0 4px 15px rgba(249, 115, 22, 0.2);
+    }
+
+    [data-theme="dark"] .btn-primary {
+      box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
     }
 
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+      box-shadow: 0 8px 25px rgba(249, 115, 22, 0.3);
+      background: linear-gradient(135deg, var(--primary-dark), #c2410c);
+    }
+
+    [data-theme="dark"] .btn-primary:hover {
+      box-shadow: 0 8px 25px rgba(249, 115, 22, 0.4);
     }
 
     .btn-outline {
@@ -890,7 +1099,14 @@
     }
 
     .btn-outline:hover {
-      background-color: rgba(59, 130, 246, 0.1);
+      background-color: rgba(249, 115, 22, 0.08);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(249, 115, 22, 0.1);
+    }
+
+    [data-theme="dark"] .btn-outline:hover {
+      background-color: rgba(249, 115, 22, 0.12);
+      box-shadow: 0 5px 15px rgba(249, 115, 22, 0.2);
     }
 
     /* Contact Section */
@@ -905,16 +1121,34 @@
     }
 
     .contact-info {
-      background-color: var(--card-bg);
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.9));
       border-radius: 16px;
       padding: 2.5rem;
-      border: 1px solid var(--border);
+      border: 1px solid rgba(249, 115, 22, 0.15);
+      position: relative;
+    }
+
+    [data-theme="dark"] .contact-info {
+      background: linear-gradient(145deg, rgba(26, 34, 51, 0.9), rgba(12, 19, 33, 0.9));
+      border: 1px solid rgba(234, 88, 12, 0.3);
+    }
+
+    .contact-info::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: inherit;
+      box-shadow: inset 0 0 20px rgba(249, 115, 22, 0.03);
+      pointer-events: none;
     }
 
     .contact-info h3 {
       font-size: 1.5rem;
       margin-bottom: 1.5rem;
-      color: var(--light);
+      color: var(--light); /* Dark text in light mode */
     }
 
     .contact-methods {
@@ -932,19 +1166,25 @@
     .contact-icon {
       width: 50px;
       height: 50px;
-      background-color: rgba(59, 130, 246, 0.1);
+      background-color: rgba(249, 115, 22, 0.08);
       border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--primary);
       font-size: 1.25rem;
+      box-shadow: 0 3px 8px rgba(249, 115, 22, 0.1);
+    }
+
+    [data-theme="dark"] .contact-icon {
+      background-color: rgba(249, 115, 22, 0.12);
+      box-shadow: 0 3px 8px rgba(249, 115, 22, 0.2);
     }
 
     .contact-details h4 {
       font-size: 1.1rem;
       margin-bottom: 0.25rem;
-      color: var(--light);
+      color: var(--light); /* Dark text in light mode */
     }
 
     .contact-details p {
@@ -953,10 +1193,28 @@
     }
 
     .contact-form {
-      background-color: var(--card-bg);
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.9));
       border-radius: 16px;
       padding: 2.5rem;
-      border: 1px solid var(--border);
+      border: 1px solid rgba(249, 115, 22, 0.15);
+      position: relative;
+    }
+
+    [data-theme="dark"] .contact-form {
+      background: linear-gradient(145deg, rgba(26, 34, 51, 0.9), rgba(12, 19, 33, 0.9));
+      border: 1px solid rgba(234, 88, 12, 0.3);
+    }
+
+    .contact-form::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: inherit;
+      box-shadow: inset 0 0 20px rgba(249, 115, 22, 0.03);
+      pointer-events: none;
     }
 
     .form-group {
@@ -966,41 +1224,62 @@
     .form-label {
       display: block;
       margin-bottom: 0.5rem;
-      color: var(--light);
+      color: var(--light); /* Dark text in light mode */
       font-weight: 500;
     }
 
     .form-control {
       width: 100%;
       padding: 0.875rem 1rem;
-      border: 1px solid var(--border);
+      border: 1px solid rgba(249, 115, 22, 0.2);
       border-radius: 8px;
-      background-color: var(--dark-light);
-      color: var(--light);
+      background-color: rgba(255, 255, 255, 0.8);
+      color: var(--light); /* Dark text in light mode */
       font-size: 1rem;
       transition: var(--transition);
+    }
+
+    [data-theme="dark"] .form-control {
+      border: 1px solid rgba(234, 88, 12, 0.3);
+      background-color: rgba(12, 19, 33, 0.7);
     }
 
     .form-control:focus {
       outline: none;
       border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
     }
 
     /* Footer */
     .footer {
       margin-top: 4rem;
       padding: 3rem 0;
-      border-top: 1px solid var(--border);
+      border-top: 1px solid rgba(249, 115, 22, 0.15);
       text-align: center;
-      background-color: var(--dark-light);
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.95));
+      position: relative;
+    }
+
+    [data-theme="dark"] .footer {
+      background: linear-gradient(145deg, rgba(12, 19, 33, 0.9), rgba(26, 34, 51, 0.95));
+      border-top: 1px solid rgba(234, 88, 12, 0.3);
+    }
+
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
     }
 
     .footer-logo {
       font-family: 'Space Grotesk', sans-serif;
       font-weight: 700;
       font-size: 1.5rem;
-      color: var(--light);
+      color: var(--light); /* Dark text in light mode */
       margin-bottom: 1.5rem;
       display: inline-block;
     }
@@ -1054,7 +1333,11 @@
       transform: translateY(20px);
       transition: var(--transition);
       z-index: 1000;
-      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+      box-shadow: 0 4px 15px rgba(249, 115, 22, 0.2);
+    }
+
+    [data-theme="dark"] .back-to-top {
+      box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
     }
 
     .back-to-top.visible {
@@ -1064,7 +1347,11 @@
 
     .back-to-top:hover {
       transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+      box-shadow: 0 8px 20px rgba(249, 115, 22, 0.3);
+    }
+
+    [data-theme="dark"] .back-to-top:hover {
+      box-shadow: 0 8px 20px rgba(249, 115, 22, 0.4);
     }
 
     /* Responsive */
@@ -1160,7 +1447,7 @@
       }
       
       .category-tabs::-webkit-scrollbar-track {
-        background: var(--border);
+        background: rgba(249, 115, 22, 0.1);
         border-radius: 10px;
       }
       
@@ -1206,7 +1493,7 @@
     }
   </style>
 </head>
-<body data-theme="dark">
+<body data-theme="light"> <!-- Default theme changed to light -->
   <!-- Animated Background -->
   <div class="bg-animation">
     <div class="gradient-circle circle-1"></div>
@@ -1395,9 +1682,9 @@
                 <li><i class="fas fa-check"></i> Mod & Plugin Support</li>
               </ul>
               <div class="product-actions">
-                <a href="https://api.whatsapp.com/send/?phone=6285731458901&text&type=phone_number&app_absent=0" class="btn btn-primary">
+                <button class="btn btn-primary order-btn" data-product="Minecraft Basic" data-price="Rp 10.000" data-category="Minecraft">
                   <i class="fab fa-whatsapp"></i> Pesan
-                </a>
+                </button>
                 <a href="#contact" class="btn btn-outline">
                   <i class="fas fa-info-circle"></i> Detail
                 </a>
@@ -1424,9 +1711,9 @@
                 <li><i class="fas fa-check"></i> Mod & Plugin Support</li>
               </ul>
               <div class="product-actions">
-                <a href="https://api.whatsapp.com/send/?phone=6285731458901&text&type=phone_number&app_absent=0" class="btn btn-primary">
+                <button class="btn btn-primary order-btn" data-product="Minecraft Standard" data-price="Rp 30.000" data-category="Minecraft">
                   <i class="fab fa-whatsapp"></i> Pesan
-                </a>
+                </button>
                 <a href="#contact" class="btn btn-outline">
                   <i class="fas fa-info-circle"></i> Detail
                 </a>
@@ -1453,9 +1740,9 @@
                 <li><i class="fas fa-check"></i> Mod & Plugin Support</li>
               </ul>
               <div class="product-actions">
-                <a href="https://api.whatsapp.com/send/?phone=6285731458901&text&type=phone_number&app_absent=0" class="btn btn-primary">
+                <button class="btn btn-primary order-btn" data-product="Minecraft Premium" data-price="Rp 50.000" data-category="Minecraft">
                   <i class="fab fa-whatsapp"></i> Pesan
-                </a>
+                </button>
                 <a href="#contact" class="btn btn-outline">
                   <i class="fas fa-info-circle"></i> Detail
                 </a>
@@ -1471,7 +1758,7 @@
             <div class="product-card" data-category="samp">
               <div class="product-header">
                 <h3 class="product-name">
-                  <img src=https://cdn.discordapp.com/attachments/1280125486990757969/1446362718390059028/pngegg_1.png?ex=6933b5c0&is=69326440&hm=b4a38289e2895d733d3c3e2922dc9b52a11a2887e3d13274c9b8975d9c22170b&" alt="SA-MP" class="product-logo">
+                  <img src="https://cdn.discordapp.com/attachments/1280125486990757969/1446362718390059028/pngegg_1.png?ex=6933b5c0&is=69326440&hm=b4a38289e2895d733d3c3e2922dc9b52a11a2887e3d13274c9b8975d9c22170b&" alt="SA-MP" class="product-logo">
                   SAMP Linux #1
                 </h3>
                 <div>
@@ -1487,9 +1774,9 @@
                 <li><i class="fas fa-check"></i> DDOS Protection</li>
               </ul>
               <div class="product-actions">
-                <a href="https://api.whatsapp.com/send/?phone=6285731458901&text&type=phone_number&app_absent=0" class="btn btn-primary">
+                <button class="btn btn-primary order-btn" data-product="SAMP Linux #1" data-price="Rp 10.000" data-category="SA-MP">
                   <i class="fab fa-whatsapp"></i> Pesan
-                </a>
+                </button>
                 <a href="#contact" class="btn btn-outline">
                   <i class="fas fa-info-circle"></i> Detail
                 </a>
@@ -1516,9 +1803,9 @@
                 <li><i class="fas fa-check"></i> DDOS Protection</li>
               </ul>
               <div class="product-actions">
-                <a href="https://api.whatsapp.com/send/?phone=6285731458901&text&type=phone_number&app_absent=0" class="btn btn-primary">
+                <button class="btn btn-primary order-btn" data-product="SAMP Linux #3" data-price="Rp 50.000" data-category="SA-MP">
                   <i class="fab fa-whatsapp"></i> Pesan
-                </a>
+                </button>
                 <a href="#contact" class="btn btn-outline">
                   <i class="fas fa-info-circle"></i> Detail
                 </a>
@@ -1545,9 +1832,9 @@
                 <li><i class="fas fa-check"></i> DDOS Protection</li>
               </ul>
               <div class="product-actions">
-                <a href="https://api.whatsapp.com/send/?phone=6285731458901&text&type=phone_number&app_absent=0" class="btn btn-primary">
+                <button class="btn btn-primary order-btn" data-product="SAMP Linux #4" data-price="Rp 100.000" data-category="SA-MP">
                   <i class="fab fa-whatsapp"></i> Pesan
-                </a>
+                </button>
                 <a href="#contact" class="btn btn-outline">
                   <i class="fas fa-info-circle"></i> Detail
                 </a>
@@ -1579,9 +1866,9 @@
                 <li><i class="fas fa-check"></i> DDOS Protection</li>
               </ul>
               <div class="product-actions">
-                <a href="https://api.whatsapp.com/send/?phone=6285731458901&text&type=phone_number&app_absent=0" class="btn btn-primary">
+                <button class="btn btn-primary order-btn" data-product="BOT Hosting #1" data-price="Rp 10.000" data-category="Discord Bot">
                   <i class="fab fa-whatsapp"></i> Pesan
-                </a>
+                </button>
                 <a href="#contact" class="btn btn-outline">
                   <i class="fas fa-info-circle"></i> Detail
                 </a>
@@ -1608,9 +1895,9 @@
                 <li><i class="fas fa-check"></i> DDOS Protection</li>
               </ul>
               <div class="product-actions">
-                <a href="https://api.whatsapp.com/send/?phone=6285731458901&text&type=phone_number&app_absent=0" class="btn btn-primary">
+                <button class="btn btn-primary order-btn" data-product="BOT Hosting #3" data-price="Rp 40.000" data-category="Discord Bot">
                   <i class="fab fa-whatsapp"></i> Pesan
-                </a>
+                </button>
                 <a href="#contact" class="btn btn-outline">
                   <i class="fas fa-info-circle"></i> Detail
                 </a>
@@ -1637,9 +1924,9 @@
                 <li><i class="fas fa-check"></i> DDOS Protection</li>
               </ul>
               <div class="product-actions">
-                <a href="https://api.whatsapp.com/send/?phone=6285731458901&text&type=phone_number&app_absent=0" class="btn btn-primary">
+                <button class="btn btn-primary order-btn" data-product="BOT Hosting #4" data-price="Rp 50.000" data-category="Discord Bot">
                   <i class="fab fa-whatsapp"></i> Pesan
-                </a>
+                </button>
                 <a href="#contact" class="btn btn-outline">
                   <i class="fas fa-info-circle"></i> Detail
                 </a>
@@ -1671,9 +1958,9 @@
                 <li><i class="fas fa-check"></i> DDOS Protection</li>
               </ul>
               <div class="product-actions">
-                <a href="https://api.whatsapp.com/send/?phone=6285731458901&text&type=phone_number&app_absent=0" class="btn btn-primary">
+                <button class="btn btn-primary order-btn" data-product="TeamSpeak Basic" data-price="Rp 15.000" data-category="TeamSpeak">
                   <i class="fab fa-whatsapp"></i> Pesan
-                </a>
+                </button>
                 <a href="#contact" class="btn btn-outline">
                   <i class="fas fa-info-circle"></i> Detail
                 </a>
@@ -1700,9 +1987,9 @@
                 <li><i class="fas fa-check"></i> Channel Admin</li>
               </ul>
               <div class="product-actions">
-                <a href="https://api.whatsapp.com/send/?phone=6285731458901&text&type=phone_number&app_absent=0" class="btn btn-primary">
+                <button class="btn btn-primary order-btn" data-product="TeamSpeak Standard" data-price="Rp 35.000" data-category="TeamSpeak">
                   <i class="fab fa-whatsapp"></i> Pesan
-                </a>
+                </button>
                 <a href="#contact" class="btn btn-outline">
                   <i class="fas fa-info-circle"></i> Detail
                 </a>
@@ -1729,9 +2016,9 @@
                 <li><i class="fas fa-check"></i> Server Admin</li>
               </ul>
               <div class="product-actions">
-                <a href="https://api.whatsapp.com/send/?phone=6285731458901&text&type=phone_number&app_absent=0" class="btn btn-primary">
+                <button class="btn btn-primary order-btn" data-product="TeamSpeak Premium" data-price="Rp 60.000" data-category="TeamSpeak">
                   <i class="fab fa-whatsapp"></i> Pesan
-                </a>
+                </button>
                 <a href="#contact" class="btn btn-outline">
                   <i class="fas fa-info-circle"></i> Detail
                 </a>
@@ -1763,9 +2050,9 @@
                 <li><i class="fas fa-check"></i> DDOS Protection</li>
               </ul>
               <div class="product-actions">
-                <a href="https://api.whatsapp.com/send/?phone=6285731458901&text&type=phone_number&app_absent=0" class="btn btn-primary">
+                <button class="btn btn-primary order-btn" data-product="CS 1.6 Basic" data-price="Rp 20.000" data-category="Counter-Strike">
                   <i class="fab fa-whatsapp"></i> Pesan
-                </a>
+                </button>
                 <a href="#contact" class="btn btn-outline">
                   <i class="fas fa-info-circle"></i> Detail
                 </a>
@@ -1792,9 +2079,9 @@
                 <li><i class="fas fa-check"></i> FastDL Support</li>
               </ul>
               <div class="product-actions">
-                <a href="https://api.whatsapp.com/send/?phone=6285731458901&text&type=phone_number&app_absent=0" class="btn btn-primary">
+                <button class="btn btn-primary order-btn" data-product="CS:GO Standard" data-price="Rp 45.000" data-category="Counter-Strike">
                   <i class="fab fa-whatsapp"></i> Pesan
-                </a>
+                </button>
                 <a href="#contact" class="btn btn-outline">
                   <i class="fas fa-info-circle"></i> Detail
                 </a>
@@ -1821,9 +2108,9 @@
                 <li><i class="fas fa-check"></i> Custom Maps Support</li>
               </ul>
               <div class="product-actions">
-                <a href="https://api.whatsapp.com/send/?phone=6285731458901&text&type=phone_number&app_absent=0" class="btn btn-primary">
+                <button class="btn btn-primary order-btn" data-product="CS:GO Premium" data-price="Rp 80.000" data-category="Counter-Strike">
                   <i class="fab fa-whatsapp"></i> Pesan
-                </a>
+                </button>
                 <a href="#contact" class="btn btn-outline">
                   <i class="fas fa-info-circle"></i> Detail
                 </a>
@@ -1841,7 +2128,7 @@
           <div class="about-text">
             <h2>Tentang LievaCloud</h2>
             <p>
-              LievaStore adalah penyedia hosting game dan bot terkemuka di Indonesia yang didirikan pada tahun 2024. 
+              LievaCloud adalah penyedia hosting game dan bot terkemuka di Indonesia yang didirikan pada tahun 2024. 
               Kami mengkhususkan diri dalam menyediakan layanan hosting terbaik untuk berbagai platform game dan aplikasi.
             </p>
             <p>
@@ -2089,6 +2376,18 @@
   </a>
 
   <script>
+    // Force light theme on initial load
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set light theme as default
+      document.body.setAttribute('data-theme', 'light');
+      localStorage.setItem('theme', 'light');
+      
+      // Add a class for theme animations
+      setTimeout(() => {
+        document.body.classList.add('theme-loaded');
+      }, 100);
+    });
+
     // Theme Toggle Functionality
     function toggleTheme() {
       const body = document.body;
@@ -2102,16 +2401,16 @@
     // Initialize Theme
     function initializeTheme() {
       const savedTheme = localStorage.getItem('theme');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
       
       if (savedTheme) {
         document.body.setAttribute('data-theme', savedTheme);
-      } else if (prefersDark) {
-        document.body.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
-      } else {
+      } else if (prefersLight) {
         document.body.setAttribute('data-theme', 'light');
         localStorage.setItem('theme', 'light');
+      } else {
+        document.body.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
       }
     }
 
@@ -2167,6 +2466,28 @@
         if (productCategories[category]) {
           productCategories[category].style.display = 'block';
         }
+      });
+    });
+
+    // Tombol Pesan WhatsApp dengan pesan otomatis
+    document.querySelectorAll('.order-btn').forEach(button => {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const product = this.getAttribute('data-product');
+        const price = this.getAttribute('data-price');
+        const category = this.getAttribute('data-category');
+        
+        // Pesan WhatsApp otomatis
+        const message = `Halo LievaCloud, saya ingin memesan *${product}* (${category}) dengan harga *${price}* per bulan. Apakah bisa dibantu?`;
+        const encodedMessage = encodeURIComponent(message);
+        const whatsappUrl = `https://api.whatsapp.com/send/?phone=6285731458901&text=${encodedMessage}&type=phone_number&app_absent=0`;
+        
+        // Buka WhatsApp di tab baru
+        window.open(whatsappUrl, '_blank');
+        
+        // Tampilkan konfirmasi
+        alert(`Membuka WhatsApp untuk memesan ${product}...`);
       });
     });
 
@@ -2252,7 +2573,7 @@
       const message = document.getElementById('message').value;
       
       // Create WhatsApp message
-      const whatsappMessage = `Halo LievaStore,\n\nNama: ${name}\nEmail: ${email}\nSubjek: ${subject}\n\nPesan:\n${message}`;
+      const whatsappMessage = `Halo LievaCloud,\n\nNama: ${name}\nEmail: ${email}\nSubjek: ${subject}\n\nPesan:\n${message}`;
       const encodedMessage = encodeURIComponent(whatsappMessage);
       const whatsappUrl = `https://api.whatsapp.com/send/?phone=6285731458901&text=${encodedMessage}&type=phone_number&app_absent=0`;
       
